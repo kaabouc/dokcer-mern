@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  backend:
+    build:
+      context: ./backend  
+    ports:
+      - "5000:5000"
+  
+    environment:
+      - MONGO_URI=mongodb+srv://kaabouchmohamed13:Y3Rkwwu8dwYEqTt3@chatbot-xml.ajfrf.mongodb.net/?retryWrites=true&w=majority&appName=chatbot-xml
+
+    networks:  
+      - mynetwork  
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:80"  
+    depends_on:
+      - backend
+ 
+    networks:
+      - mynetwork  
+
+networks:
+  mynetwork: 
+    driver: bridge
